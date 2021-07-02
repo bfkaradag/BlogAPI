@@ -11,7 +11,7 @@ namespace DataServices
     {
         
             
-        public MySqlConnection conn = new MySqlConnection("Server=160.153.253.132;Database=birol;Uid=smartdora;Pwd=Smart#dora1!;Port=3306;charset=latin5;");
+        public MySqlConnection conn = new MySqlConnection("Server=SV;Database=DB;Uid=USR;Pwd=pwd;Port=3306;charset=latin5;");
         
 
     }
