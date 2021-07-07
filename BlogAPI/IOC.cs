@@ -9,5 +9,6 @@ namespace BlogAPI
     public class IOC
     {
         public static AdminService adminService = new AdminService();
+        public static UserService userService = new UserService();
     }
 }

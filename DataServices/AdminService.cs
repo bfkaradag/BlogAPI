@@ -49,7 +49,7 @@ namespace DataServices
 
                 foreach (string item in post.tags)
                 {
-                    AddTag(item, post.id);
+                    AddTag(item, lastId);
                 }
                 return result;
             }
@@ -132,6 +132,33 @@ namespace DataServices
                 throw;
             }
         }
+        public List<BlogPost> GetPosts()
+        {
+            try
+            {
+                List<BlogPost> lst = conn.Query<BlogPost>("SELECT * FROM posts").ToList();
+                return lst;
+            }
+            catch (Exception e)
+            {
+                return null;
+                throw;
+            }
+        }
+        public BlogPost GetPost(int id)
+        {
+            try
+            {
+                BlogPost post = conn.QueryFirstOrDefault<BlogPost>("SELECT * FROM posts WHERE id = " + id);
+                post.tags = conn.Query<string>("SELECT tagname FROM posttags WHERE postid = " + id).ToArray();
+                return post;
+            }
+            catch (Exception e)
+            {
+                return null;
+                throw;
+            }
+        }
         public int DeletePost(int postId)
         {
             try
@@ -145,5 +172,6 @@ namespace DataServices
                 throw;
             }
         }
+
     }
 }

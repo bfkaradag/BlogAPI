@@ -24,10 +24,11 @@ namespace BlogAPI.Controllers
         {
            this.jwtAuthenticationManager = jwtAuthenticationManager;
         }
-        // GET: api/<AdminController>
+
         [HttpPost("addpost")]
         public IActionResult AddPost([FromBody] BlogPost post)
         {
+            var d = DateTime.UtcNow;
             int result = IOC.adminService.AddPost(post);
             if (result > 0)
                 return Ok();
@@ -51,12 +52,17 @@ namespace BlogAPI.Controllers
             return NotFound();
         }
 
-        // GET api/<AdminController>/5
-        
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("getposts")]
+        public List<BlogPost> GetPosts()
         {
-            return "value";
+            return IOC.adminService.GetPosts();
+        }
+
+        [HttpGet("getpost/{id}")]
+        public BlogPost GetPost(int id)
+        {
+            BlogPost post = IOC.adminService.GetPost(id);
+            return post;
         }
 
         [AllowAnonymous]
